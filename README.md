@@ -54,6 +54,58 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
  <li>If Not Visited, add it to the STACK. Else Call The Function Again Until No more nodes needs to be visited.</li>
 </ol></B>
 
+# PROGRAM
+```
+# DFS using Stack (Iterative) - Input Format Based
+
+def dfs(graph, start):
+    visited = set()
+    stack = [start]
+    result = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+            # Add neighbors in reverse order to maintain correct DFS order
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+    return result
+
+
+# -------------------------
+# MAIN PROGRAM
+# -------------------------
+
+# Read number of nodes and edges
+n, e = map(int, input().split())
+
+graph = {}
+
+# Build graph dictionary
+for _ in range(e):
+    u, v = input().split()
+
+    if u not in graph:
+        graph[u] = []
+    if v not in graph:
+        graph[v] = []
+
+    graph[u].append(v)
+    # If undirected graph, also add reverse
+    # graph[v].append(u)
+
+# Choose starting node (first node in graph)
+start_node = list(graph.keys())[0]
+
+# Perform DFS
+output = dfs(graph, start_node)
+print(output)
+```
 <hr>
 <h3>Sample Input</h3>
 <hr>
@@ -88,8 +140,10 @@ F H <BR>
 <hr>
 ['0', '1', '2', '3', '4']
 
-<hr>
-<h3>Result:</h3>
-<hr>
-<p>Thus,a Graph was constructed and implementation of Depth First Search for the same graph was done successfully.</p>
+
+# OUTPUT
+<img width="1058" height="219" alt="image" src="https://github.com/user-attachments/assets/f83a47df-5a87-4037-b6b7-954fb46d2908" />
+
+# Result:
+Thus,a Graph was constructed and implementation of Depth First Search for the same graph was done successfully.
 
